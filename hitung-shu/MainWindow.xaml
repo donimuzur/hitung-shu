@@ -1,0 +1,39 @@
+﻿<Window x:Class="hitung_shu.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hitung_shu"
+        mc:Ignorable="d"
+        Title="Polowijo Koperasi Karya Abadi" MinHeight="600" MinWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <Image x:Key="myImage" Source="/resource/background.png">
+            </Image>
+            <VisualBrush x:Key="myBrush"  Visual="{StaticResource myImage}"/>
+        </Grid.Resources>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Menu">
+                    <MenuItem Header="_Data SHU" x:Name="DataShu" Click="DataShu_Click" />
+                    <MenuItem Header="_Input Data Bulanan Anggota" x:Name="DataAnggota" Click="DataAnggota_Click" />
+                    <Separator />
+                    <MenuItem Header="_Exit" />
+                </MenuItem>
+                <MenuItem Header="_Bagi SHU">
+                    <MenuItem Header="_Bagi SHU" x:Name="BagiShu" Click="BagiShu_Click" />
+                    <MenuItem Header="_Bagi SHU per Anggota" x:Name="BagiShuAnggota" Click="BagiShuAnggota_Click" />
+                </MenuItem>
+                <MenuItem Header="_Anggota">
+                    <MenuItem Header="_Daftar Anggota" x:Name="DaftarAnggota" Click="DaftarAnggota_Click"/>
+                    <MenuItem Header="_Rekap Data Anggota" />
+                </MenuItem>
+                <MenuItem Header="_Setting" Click="MenuItem_Click">
+                </MenuItem>
+            </Menu>
+            <TextBox AcceptsReturn="True" />
+        </DockPanel>
+        <DockPanel Margin="0,20,0,0" x:Name="MainView" Background="{StaticResource myBrush}">
+        </DockPanel>
+    </Grid>
+</Window>

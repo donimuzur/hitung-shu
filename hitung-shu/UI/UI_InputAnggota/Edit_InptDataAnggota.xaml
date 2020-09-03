@@ -1,0 +1,52 @@
+﻿<Window x:Class="hitung_shu.UI.UI_InputAnggota.Edit_InptDataAnggota"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hitung_shu.UI.UI_InputAnggota"
+          mc:Ignorable="d"
+        Title="Insert" FontSize="14" FontWeight="Bold" Height="450" Width="750" Loaded="Window_Loaded" ResizeMode="NoResize">
+    <Grid Background="White">
+        <StackPanel Orientation="Vertical" >
+            <StackPanel Orientation="Vertical" Margin="30,30,0,0">
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Id Anggota" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
+                    <TextBox x:Name="IdAnggota" Width="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" KeyDown="IdAnggota_KeyDown"></TextBox>
+                    <TextBlock Text="Nama Anggota" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
+                    <TextBox x:Name="NamaAnggota" Width="150" FontSize="10" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Tanggal" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    <DatePicker x:Name="Tanggal" Width="150" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"></DatePicker>
+                </StackPanel >
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="30,10,0,0">
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Pokok (Rp)" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
+                    <TextBox x:Name="Pokok" Width="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" PreviewTextInput="Pokok_PreviewTextInput"></TextBox>
+                    <TextBlock Text="Wajib (Rp)" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
+                    <TextBox x:Name="Wajib" Width="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" PreviewTextInput="Wajib_PreviewTextInput"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Text="Sukarela (Rp)" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
+                    <TextBox x:Name="Sukarela" Width="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" PreviewTextInput="Sukarela_PreviewTextInput"></TextBox>
+                    <TextBlock Text="Belanja (Rp)" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
+                    <TextBox x:Name="Belanja" Width="150" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" PreviewTextInput="Belanja_PreviewTextInput"></TextBox>
+                </StackPanel >
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Bunga Pinjaman (Rp)" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="BungaPinjaman" Width="150"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" PreviewTextInput="BungaPinjaman_PreviewTextInput"></TextBox>
+                </StackPanel >
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="30,30,30,30">
+                <Button Content="Simpan" Height="50" Width="100" x:Name="BtnSimpan" Click="BtnSimpan_Click"></Button>
+                <Button Margin="30,0,0,0" Content="Tutup" Height="50" Width="100" x:Name="BtnTutup" Click="BtnTutup_Click"></Button>
+                <TextBlock Visibility="Hidden" x:Name="Id" Text="0"></TextBlock>
+                <TextBlock Visibility="Hidden" x:Name="CreatedDate" ></TextBlock>
+                <TextBlock Visibility="Hidden" x:Name="CreatedBy" Text="Admin"></TextBlock>
+                <TextBlock Visibility="Hidden" x:Name="ModifiedDate"></TextBlock>
+                <TextBlock Visibility="Hidden" x:Name="ModifiedBy"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
