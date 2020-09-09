@@ -12,5 +12,6 @@ namespace polowijo.gosari.dal
         List<BagiShuDto> GetAll();
         void Insert(BagiShuDto Dto);
         List<BagiShuDto> HitungAllShu(int Tahun);
+        BagiShuDto HitungShuAnggota(int Tahun, string IdAnggota);
     }
 }

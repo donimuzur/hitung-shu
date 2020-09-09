@@ -32,6 +32,7 @@ namespace hitung_shu
         private View_Main _dataShuView;
         private View_InptDataAnggota _iptAnggotaView;
         private View_BagiShu _bagiShuView;
+        private View_BagiShuAnggota _bagiShuAnggotaView;
         private View_DaftarAnggota _daftarAnggotaView;
         public MainWindow()
         { 
@@ -42,22 +43,26 @@ namespace hitung_shu
             _dataShuView = new View_Main();
             _iptAnggotaView = new View_InptDataAnggota();
             _bagiShuView = new View_BagiShu();
+            _bagiShuAnggotaView = new View_BagiShuAnggota();
             _daftarAnggotaView = new View_DaftarAnggota();
         }
 
         private void DataShu_Click(object sender, RoutedEventArgs e)
         {
+            _dataShuView = new View_Main();
             MainView.Children.Clear();
             MainView.Children.Add(_dataShuView);
         }
 
         private void DataAnggota_Click(object sender, RoutedEventArgs e)
         {
+            _iptAnggotaView = new View_InptDataAnggota();
             MainView.Children.Clear();
             MainView.Children.Add(_iptAnggotaView);
         }
         private void BagiShu_Click(object sender, RoutedEventArgs e)
         {
+            _bagiShuView = new View_BagiShu();
             MainView.Children.Clear();
             MainView.Children.Add(_bagiShuView);
         }
@@ -68,6 +73,7 @@ namespace hitung_shu
 
         private void DaftarAnggota_Click(object sender, RoutedEventArgs e)
         {
+            _daftarAnggotaView = new View_DaftarAnggota();
             MainView.Children.Clear();
             MainView.Children.Add(_daftarAnggotaView);
         }
@@ -79,7 +85,22 @@ namespace hitung_shu
 
         private void BagiShuAnggota_Click(object sender, RoutedEventArgs e)
         {
+            _bagiShuAnggotaView = new View_BagiShuAnggota();
+            MainView.Children.Clear();
+            MainView.Children.Add(_bagiShuAnggotaView);
+        }
 
+        private void btn_exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            System.Windows.Application.Current.Shutdown();
+            Environment.Exit(0);
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+            Environment.Exit(0);
         }
     }
 }

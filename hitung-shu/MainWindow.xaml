@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hitung_shu"
         mc:Ignorable="d"
-        Title="Polowijo Koperasi Karya Abadi" MinHeight="600" MinWidth="800">
+        Title="Polowijo Koperasi Karya Abadi" MinHeight="600" MinWidth="800" ResizeMode="NoResize" Closed="Window_Closed">
     <Grid>
         <Grid.Resources>
             <Image x:Key="myImage" Source="/resource/background.png">
@@ -18,7 +18,7 @@
                     <MenuItem Header="_Data SHU" x:Name="DataShu" Click="DataShu_Click" />
                     <MenuItem Header="_Input Data Bulanan Anggota" x:Name="DataAnggota" Click="DataAnggota_Click" />
                     <Separator />
-                    <MenuItem Header="_Exit" />
+                    <MenuItem Header="_Exit" x:Name="btn_exit" Click="btn_exit_Click"/>
                 </MenuItem>
                 <MenuItem Header="_Bagi SHU">
                     <MenuItem Header="_Bagi SHU" x:Name="BagiShu" Click="BagiShu_Click" />

@@ -1,0 +1,46 @@
+﻿<Window x:Class="hitung_shu.UI.UI_BagiSHU.Window_BagiShuAnggota"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hitung_shu.UI.UI_BagiSHU"
+        mc:Ignorable="d"
+        Title="Hasil Perhitungan SHU" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="Black" Margin="10,10,0,10" Text="ID Anggota" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <TextBox Foreground="Black" FontSize="14" FontWeight="Bold"  Width="150" x:Name="id_anggota" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
+                <TextBlock Text="Nama Anggota" Margin="50,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
+                <TextBox FontSize="14" FontWeight="Bold"  Width="150" Foreground="Black" x:Name="nama_anggota" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
+            </StackPanel >
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Total Simpanan" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <TextBox Foreground="Black" FontSize="14" FontWeight="Bold"  Width="150" x:Name="total_simpanan" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
+                <TextBlock Text="Total Belanja" Margin="50,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
+                <TextBox FontSize="14" FontWeight="Bold"  Width="150" Foreground="Black" x:Name="total_belanja" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
+            </StackPanel >
+            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                <TextBlock Foreground="Black" Margin="0,10,0,10" Text="Total Bunga Pinjaman" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <TextBox Foreground="Black" FontSize="14" FontWeight="Bold" Width="150" x:Name="bunga_pinjaman" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
+            </StackPanel>
+            <GroupBox Header="Hasil SHU" Foreground="Black" Style="{x:Null}" Margin="0,40,0,0" FontSize="16" FontWeight="Bold" Background="{x:Null}">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Foreground="Black" Margin="10,10,0,10" Text="JMA" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBox Foreground="Black" Width="150" x:Name="Jma" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
+                        <TextBlock Foreground="Black" Margin="50,10,0,10" Text="JUA" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBox Foreground="Black" Width="150" x:Name="Jua" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Foreground="Black" Margin="10,10,0,10" Text="JPA" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBox Foreground="Black" Width="150" x:Name="Jpa" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="30,30,30,30">
+                <Button  Content="Tutup" Height="50" Width="100" Click="Button_Click"></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

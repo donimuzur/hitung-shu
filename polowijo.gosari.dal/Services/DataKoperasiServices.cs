@@ -32,6 +32,10 @@ namespace polowijo.gosari.dal
         {
             try
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
                 conn = DBConnection.connect();
                 using (OleDbCommand _command = new OleDbCommand())
                 {
@@ -73,6 +77,10 @@ namespace polowijo.gosari.dal
         {
             try
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
                 conn = DBConnection.connect();
                 var GetData = GetById(Dto.Id);
 
@@ -82,7 +90,7 @@ namespace polowijo.gosari.dal
                     _command.Connection = conn;
                     _command.CommandText = "Update BAGI_SHU " +
                         "SET tahun =@Tahun, total_shu =@TotalShu, total_simpanan =@TotalSimpanan, total_penjualan=@TotalPenjualan, total_pinjaman=@TotalPinjaman, created_date=@created_date, created_by=@created_by, modified_date=@modified_date, modified_by=@modified_by WHERE id = @Id;";
-                    _command.Parameters.AddWithValue("@Id", Dto.Id);
+                    
                     _command.Parameters.AddWithValue("@Tahun", Dto.Tahun);
                     _command.Parameters.AddWithValue("@TotalShu", Dto.TotalShu);
                     _command.Parameters.AddWithValue("@TotalSimpanan", Dto.TotalSimpanan);
@@ -92,6 +100,8 @@ namespace polowijo.gosari.dal
                     _command.Parameters.AddWithValue("@created_by", GetData.CreatedBy);
                     _command.Parameters.AddWithValue("@modified_date", DateTime.Today);
                     _command.Parameters.AddWithValue("@modified_by", "Admin");
+                    _command.Parameters.AddWithValue("@Id", Dto.Id);
+
                     _command.ExecuteNonQuery();
 
                     Dto.ModifiedDate= DateTime.Today;
@@ -107,6 +117,10 @@ namespace polowijo.gosari.dal
         }
         public DataKoperasiDto GetByTahun (int Tahun)
         {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
             conn = DBConnection.connect();
             DataKoperasiDto Dto = null;
             using (OleDbCommand _command = new OleDbCommand())
@@ -142,6 +156,10 @@ namespace polowijo.gosari.dal
 
         public DataKoperasiDto GetById(long Id)
         {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
             conn = DBConnection.connect();
             DataKoperasiDto Dto = null;
             using (OleDbCommand _command = new OleDbCommand())

@@ -30,6 +30,10 @@ namespace polowijo.gosari.dal
         }
         public List<IptAnggotaDto> GetAllByTahun(int Tahun)
         {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
             conn = DBConnection.connect();
             var ListDto = new List<IptAnggotaDto>();
 
@@ -37,7 +41,7 @@ namespace polowijo.gosari.dal
             {
                 _command.CommandType = CommandType.Text;
                 _command.Connection = conn;
-                _command.CommandText = "Select B.NAMA_ANGGOTA AS nama_anggota,  A.* from IPT_ANGGOTA A INNER JOIN DATA_ANGGOTA B ON A.ID_ANGGOTA = B.ID_ANGGOTA WHERE YEAR(tanggal) =  @TAHUN";
+                _command.CommandText = "Select B.NAMA_ANGGOTA AS nama_anggota,  A.* from IPT_ANGGOTA A INNER JOIN DATA_ANGGOTA B ON A.ID_ANGGOTA = B.ID_ANGGOTA WHERE YEAR(A.tanggal) =  @TAHUN";
                 _command.Parameters.AddWithValue("@TAHUN", Tahun);
 
                 using (OleDbDataReader _dr = _command.ExecuteReader())
@@ -71,6 +75,10 @@ namespace polowijo.gosari.dal
         }
         public List<IptAnggotaDto> GetAllByIdAnggotaDanTahun(string IdAnggota,int Tahun)
         {
+            if(conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
             conn = DBConnection.connect();
             var ListDto = new List<IptAnggotaDto>();
 
@@ -78,7 +86,7 @@ namespace polowijo.gosari.dal
             {
                 _command.CommandType = CommandType.Text;
                 _command.Connection = conn;
-                _command.CommandText = "Select B.NAMA_ANGGOTA AS nama_anggota,  A.* from IPT_ANGGOTA A INNER JOIN DATA_ANGGOTA B ON A.ID_ANGGOTA = B.ID_ANGGOTA WHERE YEAR(tanggal) =  @TAHUN and id_anggota = @IdAnggota";
+                _command.CommandText = "Select B.NAMA_ANGGOTA AS nama_anggota,  A.* from IPT_ANGGOTA A INNER JOIN DATA_ANGGOTA B ON A.ID_ANGGOTA = B.ID_ANGGOTA WHERE YEAR(A.tanggal) =  @TAHUN and A.id_anggota = @IdAnggota";
                 _command.Parameters.AddWithValue("@TAHUN", Tahun);
                 _command.Parameters.AddWithValue("@IdAnggota", IdAnggota);
 
@@ -113,6 +121,10 @@ namespace polowijo.gosari.dal
         }
         public IptAnggotaDto GetById(long Id)
         {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
             conn = DBConnection.connect();
             IptAnggotaDto Dto = null;
             using (OleDbCommand _command = new OleDbCommand())
@@ -151,6 +163,10 @@ namespace polowijo.gosari.dal
 
         public IptAnggotaDto GetByIdAnggota(string IdAnggota)
         {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
             conn = DBConnection.connect();
             IptAnggotaDto Dto = null;
 
@@ -158,7 +174,7 @@ namespace polowijo.gosari.dal
             {
                 _command.CommandType = CommandType.Text;
                 _command.Connection = conn;
-                _command.CommandText = "Select B.NAMA_ANGGOTA AS nama_anggota,  A.* from IPT_ANGGOTA A INNER JOIN DATA_ANGGOTA B ON A.ID_ANGGOTA = B.ID_ANGGOTA  WHERE id_anggota =  @IdAnggota";
+                _command.CommandText = "Select B.NAMA_ANGGOTA AS nama_anggota,  A.* from IPT_ANGGOTA A INNER JOIN DATA_ANGGOTA B ON A.ID_ANGGOTA = B.ID_ANGGOTA  WHERE A.id_anggota =  @IdAnggota";
                 _command.Parameters.AddWithValue("@IdAnggota", IdAnggota);
 
                 using (OleDbDataReader _dr = _command.ExecuteReader())
@@ -191,6 +207,10 @@ namespace polowijo.gosari.dal
 
         public IptAnggotaDto Insert(IptAnggotaDto Dto)
         {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
             conn = DBConnection.connect();
             try
             {
@@ -235,6 +255,10 @@ namespace polowijo.gosari.dal
 
         public IptAnggotaDto Update(IptAnggotaDto Dto)
         {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
             conn = DBConnection.connect();
             try
             {
@@ -245,8 +269,8 @@ namespace polowijo.gosari.dal
                     _command.CommandType = CommandType.Text;
                     _command.Connection = conn;
                     _command.CommandText = "UPDATE IPT_ANGGOTA " +
-                        "SET id_anggota = @IdAnggota, tanggal=@Tanggal, pokok = @Pokok, wajib=@Wajib, sukarela=@Sukarela, belanja=@Belanja, bunga_pinjaman=@BungaPinjaman, created_date=@created_date, created_by=@created_by, modified_date=@modified_date, modified_by=@modified_by; ";
-                    
+                        "SET id_anggota = @IdAnggota, tanggal=@Tanggal, pokok = @Pokok, wajib=@Wajib, sukarela=@Sukarela, belanja=@Belanja, bunga_pinjaman=@BungaPinjaman, created_date=@created_date, created_by=@created_by, modified_date=@modified_date, modified_by=@modified_by where id=@Id;";
+
                     _command.Parameters.AddWithValue("@IdAnggota", Dto.IdAnggota);
                     _command.Parameters.AddWithValue("@Tanggal", Dto.Tanggal);
                     _command.Parameters.AddWithValue("@Pokok", Dto.Pokok);
@@ -258,14 +282,16 @@ namespace polowijo.gosari.dal
                     _command.Parameters.AddWithValue("@created_by", GetData.CreatedBy);
                     _command.Parameters.AddWithValue("@modified_date", DateTime.Today);
                     _command.Parameters.AddWithValue("@modified_by", "Admin");
+                    _command.Parameters.AddWithValue("@Id", Dto.Id);
 
                     _command.ExecuteNonQuery();
 
                     Dto.ModifiedDate = DateTime.Today;
                     Dto.ModifiedBy = "Admin";
 
-                    return Dto;
+                    
                 }
+                return Dto;
             }
             catch (Exception)
             {
@@ -276,6 +302,10 @@ namespace polowijo.gosari.dal
         {
             try
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
                 conn = DBConnection.connect();
                 using (OleDbCommand _command = new OleDbCommand())
                 {

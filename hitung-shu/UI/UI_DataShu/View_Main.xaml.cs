@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Xceed.Wpf.Toolkit;
 using polowijo.gosari.dal;
 using polowijo.gosari.dto;
 using polowijo.gosari.helpers;
@@ -62,7 +61,6 @@ namespace hitung_shu.UI.UI_DataShu
             total_simpanan.Text = data.TotalSimpanan.ToString();
             total_belanja.Text = data.TotalPenjualan.ToString();
             total_pinjaman.Text = data.TotalPinjaman.ToString();
-            total_wajib.Text = data.TotalPinjaman.ToString();
             CreatedBy.Text = data.CreatedBy;
             CreatedDate.Text = data.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss");
             ModifiedBy.Text = data.ModifiedBy;
@@ -182,7 +180,6 @@ namespace hitung_shu.UI.UI_DataShu
         {
             e.Handled = !FunctionHelpers.IsValidInteger(((TextBox)sender).Text + e.Text);
         }
-
         private void total_pokok_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !FunctionHelpers.IsValidInteger(((TextBox)sender).Text + e.Text);
@@ -191,22 +188,18 @@ namespace hitung_shu.UI.UI_DataShu
         {
             e.Handled = !FunctionHelpers.IsValidInteger(((TextBox)sender).Text + e.Text);
         }
-
         private void total_simpanan_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !FunctionHelpers.IsValidInteger(((TextBox)sender).Text + e.Text);
         }
-
         private void total_belanja_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !FunctionHelpers.IsValidInteger(((TextBox)sender).Text + e.Text);
         }
-
         private void total_pinjaman_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !FunctionHelpers.IsValidInteger(((TextBox)sender).Text + e.Text);
         }
-
         private void total_wajib_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !FunctionHelpers.IsValidInteger(((TextBox)sender).Text + e.Text);

@@ -26,10 +26,20 @@ namespace polowijo.gosari.dal
         }
         public void Insert(BagiShuDto Dto)
         {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
             conn = DBConnection.connect();
             using (OleDbCommand _command = new OleDbCommand())
             {
                 _command.CommandType = CommandType.Text;
+
+                _command.Connection = conn;
+                _command.CommandText = "DELETE FROM BAGI_SHU WHERE periode=@Periode; ";                    
+                _command.Parameters.AddWithValue("@periode", Dto.Periode);
+                _command.ExecuteNonQuery();
+
                 _command.Connection = conn;
                 _command.CommandText = "INSERT INTO BAGI_SHU " +
                     "(id_anggota, JMA, JUA, total_SHU, total_simpanan, total_belanja, total_bungapinjaman, periode, created_date, created_by, modified_date, modified_by,status) " +
@@ -51,8 +61,55 @@ namespace polowijo.gosari.dal
                 _command.ExecuteNonQuery();
             }
         }
+        public List<BagiShuDto> GetAllByTahun(int Tahun)
+        {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            conn = DBConnection.connect();
+            List<BagiShuDto> ListDto = new List<BagiShuDto>();
+            using (OleDbCommand _command = new OleDbCommand())
+            {
+                _command.CommandType = CommandType.Text;
+                _command.Connection = conn;
+                _command.CommandText = "Select * from BAGI_SHU where periode=@Periode";
+
+                using (OleDbDataReader _dr = _command.ExecuteReader())
+                {
+                    DataTable _dt = new DataTable();
+                    _dt.Load(_dr);
+
+                    foreach (DataRow row in _dt.AsEnumerable())
+                    {
+                        var Dto = new BagiShuDto();
+                        Dto.Id = Convert.ToInt64(row["id"]);
+                        Dto.IdAnggota = Convert.ToString(row["id_anggota"]);
+                        Dto.NamaAnggota = Convert.ToString(row["nama_anggota"]);
+                        Dto.Jma = Convert.ToDecimal(row["JMA"]);
+                        Dto.Jua = Convert.ToDecimal(row["JUA"]);
+                        Dto.Jpa = Convert.ToDecimal(row["JPA"]);
+                        Dto.ModifiedBy = Convert.ToString(row["modified_by"]);
+                        Dto.ModifiedDate = Convert.ToDateTime(row["modified_date"]);
+                        Dto.CreatedBy = Convert.ToString(row["created_by"]);
+                        Dto.CreatedDate = Convert.ToDateTime(row["created_date"]);
+                        Dto.Periode = Convert.ToInt32(row["periode"]);
+                        Dto.Status = Convert.ToBoolean(row["status"]);
+                        Dto.TotalShu = Convert.ToInt64(row["total_SHU"]);
+
+                        ListDto.Add(Dto);
+                    }
+                }
+            }
+            return ListDto;
+        }
+
         public List<BagiShuDto> GetAll()
         {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
             conn = DBConnection.connect();
             List<BagiShuDto> ListDto = new List<BagiShuDto>();
             using (OleDbCommand _command = new OleDbCommand())
@@ -68,10 +125,10 @@ namespace polowijo.gosari.dal
 
                     foreach (DataRow row in _dt.AsEnumerable())
                     {
-
                         var Dto = new BagiShuDto();
                         Dto.Id = Convert.ToInt64(row["id"]);
                         Dto.IdAnggota = Convert.ToString(row["id_anggota"]);
+                        Dto.NamaAnggota = Convert.ToString(row["nama_anggota"]);
                         Dto.Jma = Convert.ToDecimal(row["JMA"]); 
                         Dto.Jua = Convert.ToDecimal(row["JUA"]);
                         Dto.Jpa = Convert.ToDecimal(row["JPA"]);
@@ -79,7 +136,7 @@ namespace polowijo.gosari.dal
                         Dto.ModifiedDate = Convert.ToDateTime(row["modified_date"] );
                         Dto.CreatedBy = Convert.ToString(row["created_by"]);  
                         Dto.CreatedDate = Convert.ToDateTime(row["created_date"]); 
-                        Dto.Periode = Convert.ToDateTime(row["periode"]); 
+                        Dto.Periode = Convert.ToInt32(row["periode"]); 
                         Dto.Status = Convert.ToBoolean(row["status"]); 
                         Dto.TotalShu = Convert.ToInt64(row["total_SHU"]);
 
@@ -89,22 +146,22 @@ namespace polowijo.gosari.dal
             }
             return ListDto;
         }
-        public List<BagiShuDto> HitungAllShu(int Tahun)
+        public BagiShuDto HitungShuAnggota(int Tahun, string IdAnggota)
         {
             try
             {
-                conn = DBConnection.connect();
                 var ListBagiShuDto = new List<BagiShuDto>();
                 var GetDataShu = _dataKoperasiServices.GetByTahun(Tahun);
-                var GetAllDataAnggota = _dataAnggotaServices.GetAllActive();
+                var GetDataAnggota = _dataAnggotaServices.GetByIdAnggota(IdAnggota);
 
-                foreach (var item in GetAllDataAnggota)
+                var Dto = new BagiShuDto();
+
+                Dto.IdAnggota = GetDataAnggota.IdAnggota;
+                Dto.NamaAnggota = GetDataAnggota.NamaAnggota;
+                Dto.Periode = Tahun;
+                var GetAllIpt = _iptAnggotaServices.GetAllByIdAnggotaDanTahun(Dto.IdAnggota, Tahun);
+                if (GetAllIpt.Count > 0)
                 {
-                    var Dto = new BagiShuDto();
-
-                    Dto.IdAnggota = item.IdAnggota;                    
-                    var GetAllIpt = _iptAnggotaServices.GetAllByIdAnggotaDanTahun(Dto.IdAnggota, Tahun);
-
                     #region hitung JMA
                     try
                     {
@@ -144,15 +201,83 @@ namespace polowijo.gosari.dal
 
                         throw;
                     }
-                    
-                    ListBagiShuDto.Add(Dto);
+                    Dto.TotalShu = Dto.Jma + Dto.Jpa + Dto.Jua;
                     #endregion
+                }
+                return Dto;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<BagiShuDto> HitungAllShu(int Tahun)
+        {
+            try
+            {
+                var ListBagiShuDto = new List<BagiShuDto>();
+                var GetDataShu = _dataKoperasiServices.GetByTahun(Tahun);
+                var GetAllDataAnggota = _dataAnggotaServices.GetAllActive();
+
+                foreach (var item in GetAllDataAnggota)
+                {
+                    var Dto = new BagiShuDto();
+
+                    Dto.IdAnggota = item.IdAnggota;
+                    Dto.NamaAnggota = item.NamaAnggota;
+                    Dto.Periode = Tahun;
+                    var GetAllIpt = _iptAnggotaServices.GetAllByIdAnggotaDanTahun(Dto.IdAnggota, Tahun);
+                    if(GetAllIpt.Count > 0)
+                    {
+                        #region hitung JMA
+                        try
+                        {
+                            var Pokok = GetAllIpt.FirstOrDefault().Pokok;
+                            var Wajib = GetAllIpt.Sum(x => x.Wajib);
+                            var Sukarela = GetAllIpt.Sum(x => x.Sukarela);
+
+                            Dto.TotalSimpanan = Pokok + Wajib + Sukarela;
+                            Dto.Jma = (Dto.TotalSimpanan / GetDataShu.TotalSimpanan) * (decimal)0.2 * GetDataShu.TotalShu;
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                        #endregion
+
+                        #region hitung JUA
+                        try
+                        {
+                            Dto.TotalBelanja = GetAllIpt.Sum(x => x.Belanja);
+                            Dto.Jua = (Dto.TotalBelanja / GetDataShu.TotalPenjualan) * (decimal)0.1 * GetDataShu.TotalShu;
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                        #endregion
+
+                        #region  hitung JPA
+                        try
+                        {
+                            Dto.TotalBungaPinjaman = GetAllIpt.Sum(x => x.BungaPinjaman);
+                            Dto.Jpa = (Dto.TotalBungaPinjaman / GetDataShu.TotalPinjaman) * (decimal)0.1 * GetDataShu.TotalShu;
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                        Dto.TotalShu = Dto.Jma + Dto.Jpa + Dto.Jua;
+                        ListBagiShuDto.Add(Dto);
+                        #endregion
+                    }
+
                 }
                 return ListBagiShuDto;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

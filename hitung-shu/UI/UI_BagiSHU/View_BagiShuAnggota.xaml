@@ -5,12 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:hitung_shu.UI.UI_BagiSHU"
              xmlns:wpftoolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-             mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="780">
+             mc:Ignorable="d" d:DesignWidth="780" Height="500">
     <Grid Background="White">
         <ScrollViewer>
             <StackPanel Orientation="Vertical" >
-                <GroupBox Header="Bagi SHU" Foreground="Black" Style="{x:Null}" Margin="30,30,30,0" FontSize="16" FontWeight="Bold" Background="{x:Null}">
+                <GroupBox Header="Bagi SHU" Foreground="Black" Style="{x:Null}" FontSize="16" FontWeight="Bold" Background="{x:Null}">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Tahun" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
@@ -18,10 +17,14 @@
                                 <TextBox x:Name="Tahun" HorizontalContentAlignment="Right" BorderBrush="{x:Null}" TextAlignment="Right" KeyDown="Tahun_KeyDown"/>
                             </wpftoolkit:ButtonSpinner>
                             <Button Margin ="10,0,0,0" Content="Cek" Width="50" x:Name="Cek" Click="Cek_Click"></Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                            <TextBlock Foreground="Black" Margin="0,10,0,10" Text="ID Anggota" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Foreground="Black" FontSize="14" FontWeight="Bold" Width="150" x:Name="IdAnggota" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
                             <Button Margin ="10,0,0,0" Content="Hitung Shu" Width="100" x:Name="HitungShu" Click="HitungShu_Click" IsEnabled="False"></Button>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Total SHU" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                            <TextBlock Foreground="Black" Margin="0,10,0,10" Text="Total SHU" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                             <TextBox Foreground="Black" Width="150" x:Name="total_shu" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -31,9 +34,9 @@
                             <TextBox Foreground="Black" Width="150" x:Name="JasaModal" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                            <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Jasa Anggota (30%)" FontSize="14" FontWeight="Bold" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Jasa Anggota (10%)" FontSize="14" FontWeight="Bold" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                             <TextBox Foreground="Black" Width="150" x:Name="JasaAnggota" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
-                            <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Dana Pengawas (20%)" FontSize="14" FontWeight="Bold" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Dana Pengawas (10%)" FontSize="14" FontWeight="Bold" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                             <TextBox Foreground="Black" Width="150" x:Name="PengurusPengawas" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -48,35 +51,19 @@
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="Simpanan (Pokok + wajib +sukarela) dalam 1 Tahun" Foreground="Black" Style="{x:Null}" Margin="30,30,30,0" FontSize="16" FontWeight="Bold" Background="{x:Null}">
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Pokok" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
-                            <TextBox Width="150" Foreground="Black" x:Name="total_pokok" TextAlignment="Right"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
-                            <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Wajib" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                            <TextBox Foreground="Black" Width="150" x:Name="total_wajib" TextAlignment="Right"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Foreground="Black" Margin="10,10,0,10" Text="sukarela" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                            <TextBox Foreground="Black" Width="150" x:Name="total_sukarela" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
-                            <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Total Simpanan" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                            <TextBox Foreground="Black" Width="150" x:Name="total_simpanan" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
-                        </StackPanel >
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Total Simpanan" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBox Foreground="Black" FontSize="14" FontWeight="Bold"  Width="150" x:Name="total_simpanan" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
+                        <TextBlock Text="Total Penjualan" Margin="50,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
+                        <TextBox FontSize="14" FontWeight="Bold"  Width="150" Foreground="Black" x:Name="total_belanja" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
+                    </StackPanel >
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <TextBlock Foreground="Black" Margin="0,10,0,10" Text="Total Piutang" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBox Foreground="Black" FontSize="14" FontWeight="Bold" Width="150" x:Name="total_pinjaman" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
                     </StackPanel>
-                </GroupBox>
-                <GroupBox Foreground="Black" Style="{x:Null}" Margin="30,30,30,0" FontSize="16" FontWeight="Bold" Background="{x:Null}">
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Total Belanja" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
-                            <TextBox Width="150" Foreground="Black" x:Name="total_belanja" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
-                            <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Total Pinjaman" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                            <TextBox Foreground="Black" Width="150" x:Name="total_pinjaman" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" IsEnabled="False"></TextBox>
-                        </StackPanel>
-                    </StackPanel>
-                </GroupBox>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="30,30,30,30">
-                    <Button Content="Simpan" Height="50" Width="100" x:Name="BtnSimpan" Click="BtnSimpan_Click"></Button>
-                    <Button Margin="30,0,0,0" Content="Tutup" Height="50" Width="100"></Button>
                     <TextBlock Visibility="Hidden" x:Name="Id"></TextBlock>
                     <TextBlock Visibility="Hidden" x:Name="CreatedDate"></TextBlock>
                     <TextBlock Visibility="Hidden" x:Name="CreatedBy"></TextBlock>

@@ -10,7 +10,7 @@
              d:DesignHeight="500" d:DesignWidth="780">
     <Grid Background="White">
         <StackPanel Orientation="Vertical" >
-            <GroupBox Header="Data SHU" Foreground="Black" Style="{x:Null}" Margin="30,30,30,0" FontSize="16" FontWeight="Bold" Background="{x:Null}">
+            <GroupBox Header="Data SHU" Foreground="Black" Style="{x:Null}" FontSize="16" FontWeight="Bold" Background="{x:Null}">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Tahun" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
@@ -25,7 +25,7 @@
                     </StackPanel >
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="Simpanan (Pokok + wajib +sukarela)" Foreground="Black" Style="{x:Null}" Margin="30,30,30,0" FontSize="16" FontWeight="Bold" Background="{x:Null}">
+            <GroupBox Header="Simpanan (Pokok + wajib +sukarela)" Foreground="Black" Style="{x:Null}" FontSize="16" FontWeight="Bold" Background="{x:Null}">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Pokok" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
@@ -41,12 +41,12 @@
                     </StackPanel >
                 </StackPanel>
             </GroupBox>
-            <GroupBox Foreground="Black" Style="{x:Null}" Margin="30,30,30,0" FontSize="16" FontWeight="Bold" Background="{x:Null}">
+            <GroupBox Foreground="Black" Style="{x:Null}" FontSize="16" FontWeight="Bold" Background="{x:Null}">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Total Belanja" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
+                        <TextBlock Text="Total Penjualan" Margin="10,10,0,10" Width="150" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"></TextBlock>
                         <TextBox Width="150" Foreground="Black" x:Name="total_belanja" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" PreviewTextInput="total_belanja_PreviewTextInput"></TextBox>
-                        <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Total Pinjaman" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Foreground="Black" Margin="10,10,0,10" Text="Total Piutang" FontSize="14" FontWeight="Bold" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                         <TextBox Foreground="Black" Width="150" x:Name="total_pinjaman" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" PreviewTextInput="total_pinjaman_PreviewTextInput" ></TextBox>
                     </StackPanel>
                 </StackPanel>
