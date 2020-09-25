@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" 
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
 
   <?ifndef Version?>
   <?define Version = "1.0.0.0" ?>
@@ -16,27 +17,19 @@
     Copyright="Copyright© 2020 Polowijo Gosari Group" IconSourceFile="resource\icon.ico"
     SplashScreenSourceFile="resource\background.png"
     AboutUrl= "https://www.polowijogosari.co.id">
-    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" >
+      <bal:WixStandardBootstrapperApplication
+        LogoFile="resource/background.png"
+        ThemeFile="resource/ClassicTheme.xml"
+        LocalizationFile="resource/ClassicTheme.wxl"
+        LicenseUrl="http://opensource.org/licenses/ms-rl" />
+    </BootstrapperApplicationRef>
     <WixVariable Id="WixStdbaLicenseRtf" Value="Other\License.rtf"/>
     <Variable Name="InstallFolder" Type="string" Value="[ProgramFilesFolder]Hitung Shu" />
-    
-    <PayloadGroup Id="NetFx46RedistPayload">
-        <Payload Name="NDP46-KB3045557-x86-x64-AllOS-ENU.exe"
-                 SourceFile="Redist\NDP46-KB3045557-x86-x64-AllOS-ENU.exe"/>
-    </PayloadGroup>
-    
+
+   
     <Chain>
-      <PackageGroupRef Id="NetFx46Redist" />
-      <RollbackBoundary />
       <MsiPackage Id="SetupProject" SourceFile="$(var.SetupProject.TargetPath)"/>
     </Chain>   
   </Bundle>
-  
-  <Fragment>
-    <PackageGroup Id="Netfx46" >
-      <ExePackage Id="Netfx46" Cache="no" Compressed="no" PerMachine="yes" Permanent="yes" Vital="yes" InstallCommand="/q"
-          SourceFile="NDP46-KB3045557-x86-x64-AllOS-ENU.exe"
-          DetectCondition="WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED"/>
-    </PackageGroup>
-  </Fragment>
 </Wix>

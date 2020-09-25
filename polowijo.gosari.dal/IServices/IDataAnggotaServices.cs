@@ -17,5 +17,6 @@ namespace polowijo.gosari.dal
         DataAnggotaDto Update(DataAnggotaDto Dto);
         void Delete(long Id);
         List<DataAnggotaDto> GetAll();
+        void ExportXls(string FilePath);
     }
 }

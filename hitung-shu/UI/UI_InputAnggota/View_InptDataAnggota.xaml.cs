@@ -1,6 +1,9 @@
-﻿using polowijo.gosari.dal;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.Win32;
+using polowijo.gosari.dal;
 using polowijo.gosari.dto;
 using polowijo.gosari.helpers;
+using SpreadsheetLight;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,6 +32,7 @@ namespace hitung_shu.UI.UI_InputAnggota
 
         private Insert_InptDataAnggota _insertIptDataAnggota;
         private Edit_InptDataAnggota _editIptDataAnggota;
+        private Loading Dialog_Loading;
 
         private ICollectionView _data;
         Dictionary<string, Predicate<IptAnggotaDto>> filters = new Dictionary<string, Predicate<IptAnggotaDto>>();
@@ -216,9 +220,32 @@ namespace hitung_shu.UI.UI_InputAnggota
             }
         }
 
-        private void Export_Click(object sender, RoutedEventArgs e)
+        private async void Export_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var Data = Dgv_Home.ItemsSource.Cast<IptAnggotaDto>().ToList();
+                SaveFileDialog _saveFileDialog = new SaveFileDialog();
+                _saveFileDialog.Filter = "Excel file (*.xls)|*.xlsx";
+                if (_saveFileDialog.ShowDialog() == true)
+                {
+                    Dialog_Loading = new Loading();
+                    Dialog_Loading.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+                    Dialog_Loading.Show();
 
+                    await Task.Run(() => CreateXls(Data, _saveFileDialog.FileName));
+
+                    Dialog_Loading.Close();
+                    Dgv_Home.ItemsSource = _data;
+                }
+            }
+            catch (Exception ex)
+            {
+                await Dialog_Loading.Dispatcher.BeginInvoke(new Action(() => { Dialog_Loading.Close(); }));
+                LogError.WriteError(ex);
+                System.Windows.MessageBox.Show("Error!! \n telah terjadi kesalahan, Hubungi administrator", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
         }
 
         private void Dgv_Home_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -255,5 +282,174 @@ namespace hitung_shu.UI.UI_InputAnggota
             Filter_IdAnggota.Text = "";
             PopulateData();
         }
+
+        #region --- Export to XLS ---
+        public void CreateXls(List<IptAnggotaDto> Data, string FilePath)
+        {
+            try
+            {
+                var slDocument = new SLDocument();
+                SLPageSettings ps = new SLPageSettings();
+                ps.Orientation = OrientationValues.Landscape;
+                ps.ScalePage(50);
+                ps.PaperSize = SLPaperSizeValues.FolioPaper;
+                ps.LeftMargin = 0;
+                ps.RightMargin = 0;
+                slDocument.SetPageSettings(ps);
+
+                //title
+                slDocument.SetCellValue(1, 1, "Detail SHU Koperasi Polowijo Karya Abadi");
+                slDocument.MergeWorksheetCells(1, 1, 1, 9);
+                slDocument.SetCellValue(2, 1, "Periode 2020");
+                slDocument.MergeWorksheetCells(2, 1, 2, 9);
+
+                //create style
+                SLStyle valueStyle = slDocument.CreateStyle();
+                valueStyle.SetHorizontalAlignment(HorizontalAlignmentValues.Center);
+                valueStyle.Font.Bold = true;
+                valueStyle.Font.FontSize = 16;
+                slDocument.SetCellStyle(1, 1, 2, 1, valueStyle);
+
+                //create header
+                slDocument = CreateHeaderExcel(slDocument);
+
+                //create data
+                slDocument = CreateDataExcel(slDocument, Data);
+
+                var FullPath = FilePath;
+                if (System.IO.File.Exists(FullPath))
+                {
+                    System.IO.File.Delete(FullPath);
+                }
+
+                slDocument.SaveAs(FullPath);
+            }
+            catch (Exception)
+            {
+                Dialog_Loading.Close();
+                throw;
+            }
+        }
+        private SLDocument CreateHeaderExcel(SLDocument slDocument)
+        {
+            int iRow = 10;
+            int col = 1;
+            
+            slDocument.SetCellValue(iRow, col++, "Id");
+            slDocument.SetColumnWidth(1, 10);
+            //slDocument.MergeWorksheetCells(iRow, 1, iRow + 1, 1);
+            slDocument.SetCellValue(iRow, col++, "Id Anggota");
+            slDocument.SetColumnWidth(2, 20);            
+            //slDocument.MergeWorksheetCells(iRow, 2, iRow + 1, 2);
+            slDocument.SetCellValue(iRow, col, "Nama Anggota");
+            slDocument.SetColumnWidth(3, 15);
+            col++;
+            //slDocument.MergeWorksheetCells(iRow, 3, iRow + 1, 3);
+            slDocument.SetCellValue(iRow, col, "Tanggal Gabung");
+            slDocument.SetColumnWidth(4, 15);
+            col++;
+            //slDocument.MergeWorksheetCells(iRow, 4, iRow + 1, 4);
+            slDocument.SetCellValue(iRow, col, "Pokok");
+            slDocument.SetColumnWidth(5, 15);
+            col++;
+            //slDocument.MergeWorksheetCells(iRow, 5, iRow + 1, 5);
+            slDocument.SetCellValue(iRow, col, "Wajib");
+            slDocument.SetColumnWidth(6, 15);
+            col++;
+            //slDocument.MergeWorksheetCells(iRow, 6, iRow + 1, 6);
+            slDocument.SetCellValue(iRow, col, "Sukarela");
+            slDocument.SetColumnWidth(7, 15);
+            col++;
+            //slDocument.MergeWorksheetCells(iRow, 6, iRow + 1, 6);
+            slDocument.SetCellValue(iRow, col, "Belanja");
+            slDocument.SetColumnWidth(8, 15);
+            col++;
+            //slDocument.MergeWorksheetCells(iRow, 6, iRow + 1, 6);
+            slDocument.SetCellValue(iRow, col, "Bunga Pinjaman");
+            slDocument.SetColumnWidth(9, 15);
+            col++;
+
+            SLStyle headerStyle = slDocument.CreateStyle();
+            headerStyle.Alignment.Horizontal = HorizontalAlignmentValues.Center;
+            headerStyle.Font.Bold = true;
+            headerStyle.Border.LeftBorder.BorderStyle = BorderStyleValues.Thin;
+            headerStyle.Border.RightBorder.BorderStyle = BorderStyleValues.Thin;
+            headerStyle.Border.TopBorder.BorderStyle = BorderStyleValues.Thin;
+            headerStyle.Border.BottomBorder.BorderStyle = BorderStyleValues.Thin;
+            //headerStyle.Fill.SetPattern(PatternValues.Solid, System.Drawing.Color.LightGreen, System.Drawing.Color.LightGreen);
+            headerStyle.SetWrapText(true);
+            headerStyle.SetVerticalAlignment(VerticalAlignmentValues.Center);
+            headerStyle.Font.FontSize = 10;
+            slDocument.SetCellStyle(10, 1, iRow, 9, headerStyle);
+
+            return slDocument;
+        }
+
+        private SLDocument CreateDataExcel(SLDocument slDocument, List<IptAnggotaDto> listData)
+        {
+            int iRow = 11; //starting row data
+            int row = 1;
+            try
+            {
+                foreach (var data in listData)
+                {
+                    int col = 1;
+                    slDocument.SetCellValue(iRow, col, data.Id);
+                    col++;
+                    slDocument.SetCellValue(iRow, col, data.IdAnggota);
+                    col++;
+                    slDocument.SetCellValue(iRow, col, data.NamaAnggota);
+                    col++;
+                    slDocument.SetCellValue(iRow, col, data.Tanggal);
+                    col++;
+                    slDocument.SetCellValue(iRow, col, data.Pokok);
+                    col++;
+                    slDocument.SetCellValue(iRow, col, data.Wajib);
+                    col++;
+                    slDocument.SetCellValue(iRow, col, data.Sukarela);
+                    col++;
+                    slDocument.SetCellValue(iRow, col, data.Belanja);
+                    col++;
+                    slDocument.SetCellValue(iRow, col, data.BungaPinjaman);
+
+                    iRow++;
+                    row++;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            //create style
+            SLStyle valueStyle = slDocument.CreateStyle();
+            valueStyle.Border.LeftBorder.BorderStyle = BorderStyleValues.Thin;
+            valueStyle.Border.RightBorder.BorderStyle = BorderStyleValues.Thin;
+            valueStyle.Border.TopBorder.BorderStyle = BorderStyleValues.Thin;
+            valueStyle.Border.BottomBorder.BorderStyle = BorderStyleValues.Thin;
+
+            SLStyle dateStyle = slDocument.CreateStyle();
+            dateStyle.FormatCode = "dd-MMM-yyyy";
+
+            SLStyle hourStyle = slDocument.CreateStyle();
+            hourStyle.FormatCode = "HH:mm";
+
+            SLStyle decimalFormat = slDocument.CreateStyle();
+            decimalFormat.FormatCode = "#,##0.00";
+
+            SLStyle decimalFormat2 = slDocument.CreateStyle();
+            decimalFormat2.FormatCode = "Rp #,##0.00";
+
+            slDocument.SetCellStyle(11, 3, iRow, 9, decimalFormat);
+
+            valueStyle.SetHorizontalAlignment(HorizontalAlignmentValues.Center);
+            valueStyle.SetVerticalAlignment(VerticalAlignmentValues.Center);
+            valueStyle.Font.FontSize = 10;
+            slDocument.SetCellStyle(10, 1, iRow, 9, valueStyle);
+
+            return slDocument;
+        }
+        #endregion
+
     }
 }

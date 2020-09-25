@@ -265,12 +265,11 @@ namespace hitung_shu.UI.UI_BagiSHU
 
                     Dialog_Loading.Close();
                     Dgv_Home.ItemsSource = _data;
-
-                    ;
                 }
             }
             catch (Exception ex)
             {
+                Dialog_Loading.Dispatcher.BeginInvoke(new Action(() => { Dialog_Loading.Close(); }));
                 LogError.WriteError(ex);
                 System.Windows.MessageBox.Show("Error!! \n telah terjadi kesalahan, Hubungi administrator", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                

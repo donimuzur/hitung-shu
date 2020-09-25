@@ -230,7 +230,30 @@ namespace polowijo.gosari.dal
                 throw;
             }
         }
+        public void ExportXls(string FilePath)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                conn = DBConnection.connect();
+                List<DataAnggotaDto> ListDto = new List<DataAnggotaDto>();
+                using (OleDbCommand _command = new OleDbCommand())
+                {
+                    _command.CommandType = CommandType.Text;
+                    _command.Connection = conn;
+                    _command.CommandText = "Select * from DATA_ANGGOTA INTO OUTFILE '" + FilePath + "' FIELDS TERMINATED BY ';'";
+                    _command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public DataAnggotaDto GetById(long Id)
         {
             try
