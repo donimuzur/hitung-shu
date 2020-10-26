@@ -77,6 +77,12 @@ namespace hitung_shu.UI.UI_DaftarAnggota
 
                 DataAnggotaDto Dto = new DataAnggotaDto();
                 Dto.Id = Convert.ToInt64(Id.Text);
+                var ExistID = _dataAnggotaServices.GetByIdAnggota(IdAnggota.Text);
+                if(ExistID != null)
+                {
+                    System.Windows.MessageBox.Show("Id Anggota sudah ada", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
                 Dto.CreatedBy = CreatedBy.Text;
                 Dto.CreatedDate = Convert.ToDateTime(CreatedDate.Text);
                 Dto.ModifiedBy = ModifiedBy.Text;
@@ -87,7 +93,7 @@ namespace hitung_shu.UI.UI_DaftarAnggota
                 Dto.TanggalGabung = Convert.ToDateTime(TanggalGabung.Text);
                 Dto.Status = Status.IsChecked.HasValue ? Status.IsChecked.Value : false;
 
-                Dto = _dataAnggotaServices.Insert(Dto);
+                Dto = _dataAnggotaServices.InserOrUpdate(Dto);
                 System.Windows.MessageBox.Show("Data sudah tersimpan", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                 CloseWin();
 

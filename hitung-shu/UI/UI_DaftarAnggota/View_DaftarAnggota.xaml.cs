@@ -139,6 +139,7 @@ namespace hitung_shu.UI.UI_DaftarAnggota
 
                     await Task.Run(() => CreateXls(Data, _saveFileDialog.FileName));
                     System.Windows.MessageBox.Show("Data berhasil di export", "Informasi", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Dialog_Loading.Close();
                 }
             }
             catch (Exception ex)
