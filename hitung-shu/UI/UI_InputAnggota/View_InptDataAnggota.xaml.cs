@@ -32,6 +32,7 @@ namespace hitung_shu.UI.UI_InputAnggota
 
         private Insert_InptDataAnggota _insertIptDataAnggota;
         private Edit_InptDataAnggota _editIptDataAnggota;
+        private Import_InptDataAnggota _importIptDataAnggota;
         private Loading Dialog_Loading;
 
         private ICollectionView _data;
@@ -282,7 +283,24 @@ namespace hitung_shu.UI.UI_InputAnggota
             Filter_IdAnggota.Text = "";
             PopulateData();
         }
-
+        private void Import_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _importIptDataAnggota = new Import_InptDataAnggota();
+                var result = _importIptDataAnggota.ShowDialog();
+                if (result == true)
+                {
+                    PopulateData();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError.WriteError(ex);
+                System.Windows.MessageBox.Show("Error!! \n telah terjadi kesalahan, Hubungi administrator", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
         #region --- Export to XLS ---
         public void CreateXls(List<IptAnggotaDto> Data, string FilePath)
         {
@@ -451,5 +469,6 @@ namespace hitung_shu.UI.UI_InputAnggota
         }
         #endregion
 
+      
     }
 }

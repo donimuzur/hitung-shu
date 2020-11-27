@@ -252,7 +252,57 @@ namespace polowijo.gosari.dal
                 throw;
             }
         }
+        public bool InsertBulk (List<IptAnggotaDto> ListDto)
+        {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            conn = DBConnection.connect();
+            try
+            {
+                using (OleDbCommand _command = new OleDbCommand())
+                {
 
+                    using (var trans = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            _command.Transaction = trans;
+                            _command.CommandType = CommandType.Text;
+                            _command.Connection = conn;
+
+                            foreach (var Dto in ListDto)
+                            {
+                                string Message = "('" + Dto.IdAnggota + "','" + Dto.Tanggal + "'," + Dto.Pokok + "," + Dto.Wajib + "," + Dto.Sukarela + "," + Dto.Belanja + "," + Dto.BungaPinjaman + ",@created_date, @created_by, @modified_date, @modified_by)";
+                                _command.CommandText = "INSERT INTO IPT_ANGGOTA " +
+                              "(id_anggota, tanggal, pokok, wajib, sukarela, belanja, bunga_pinjaman, created_date, created_by, modified_date, modified_by) " +
+                              "VALUES " + Message;
+
+                                _command.Parameters.AddWithValue("@created_date", DateTime.Today);
+                                _command.Parameters.AddWithValue("@created_by", "Admin");
+                                _command.Parameters.AddWithValue("@modified_date", DateTime.Today);
+                                _command.Parameters.AddWithValue("@modified_by", "Admin");
+                                _command.ExecuteNonQuery();
+                                
+                            }
+                            trans.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            trans.Rollback();
+                            throw;
+                            /* log exception and the fact that rollback succeeded */
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public IptAnggotaDto Update(IptAnggotaDto Dto)
         {
             if (conn.State == ConnectionState.Open)

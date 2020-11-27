@@ -11,6 +11,7 @@ namespace polowijo.gosari.dal
     {
         List<IptAnggotaDto> GetAllByTahun(int Tahun);
         IptAnggotaDto InserOrUpdate(IptAnggotaDto Dto);
+        bool InsertBulk(List<IptAnggotaDto> ListDto);
         IptAnggotaDto GetById(long Id);
         IptAnggotaDto GetByIdAnggota(string IdAnggota);
         List<IptAnggotaDto> GetAllByIdAnggotaDanTahun(string IdAnggota, int Tahun);

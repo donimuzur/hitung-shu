@@ -66,6 +66,7 @@
                 <Button x:Name="Edit" FontSize="14" Width="90" Margin="5" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Edit_Click">Edit</Button>
                 <Button x:Name="Hapus" FontSize="14" Width="90" Margin="5" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Hapus_Click">Hapus</Button>
                 <Button x:Name="Export" FontSize="14" Width="90" Margin="5" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Export_Click">Export</Button>
+                <Button x:Name="Import" FontSize="14" Width="90" Margin="5" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Import_Click">Import</Button>
             </StackPanel>
             <!--#endregion-->
         </Grid>

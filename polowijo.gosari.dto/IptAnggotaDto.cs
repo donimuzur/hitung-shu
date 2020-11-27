@@ -21,5 +21,6 @@ namespace polowijo.gosari.dto
         public string CreatedBy { set; get; }
         public DateTime ModifiedDate { set; get; }
         public string ModifiedBy { set; get; }
+        public string Message { set; get; }
     }
 }
