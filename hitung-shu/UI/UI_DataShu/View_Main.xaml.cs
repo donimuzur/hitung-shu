@@ -90,17 +90,17 @@ namespace hitung_shu.UI.UI_DataShu
             var data = _dataKoperasiServices.GetByTahun(Convert.ToInt32(Tahun.Text));
 
             Id.Text = "0";
-            total_shu.Text ="";
-            total_wajib.Text = "";
-            total_sukarela.Text = "";
-            total_pokok.Text = "";
-            total_simpanan.Text = "";
-            total_belanja.Text = "";
-            total_pinjaman.Text = "";
-            CreatedBy.Text = "";
-            CreatedDate.Text = "";
-            ModifiedBy.Text = "";
-            ModifiedDate.Text = "";
+            total_shu.Text ="0";
+            total_wajib.Text = "0";
+            total_sukarela.Text = "0";
+            total_pokok.Text = "0";
+            total_simpanan.Text = "0";
+            total_belanja.Text = "0";
+            total_pinjaman.Text = "0";
+            CreatedBy.Text = "0";
+            CreatedDate.Text = "0";
+            ModifiedBy.Text = "0";
+            ModifiedDate.Text = "0";
 
             if (data != null)
             {
@@ -124,29 +124,44 @@ namespace hitung_shu.UI.UI_DataShu
             try
             {
                 var Dto = new DataKoperasiDto();
+
                 if(string.IsNullOrEmpty(total_shu.Text))
                 {
                     System.Windows.MessageBox.Show("Total SHU tidak boleh kosong", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
 
-                if (string.IsNullOrEmpty(total_simpanan.Text))
-                {
-                    System.Windows.MessageBox.Show("Total Simpanan tidak boleh kosong", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-                
                 if (string.IsNullOrEmpty(total_belanja.Text))
                 {
-                    System.Windows.MessageBox.Show("Total Belanja tidak boleh kosong", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
+                    total_belanja.Text = "0";
+                }
+                
+                if (string.IsNullOrEmpty(total_simpanan.Text))
+                {
+                    total_simpanan.Text = "0";
+                }
+
+                if (string.IsNullOrEmpty(total_pokok.Text))
+                {
+                    total_pokok.Text = "0";
+                }
+
+                if (string.IsNullOrEmpty(total_wajib.Text))
+                {
+                    total_wajib.Text = "0";
+                }
+
+                if (string.IsNullOrEmpty(total_sukarela.Text))
+                {
+                    total_sukarela.Text = "0";
                 }
 
                 if (string.IsNullOrEmpty(total_pinjaman.Text))
                 {
-                    System.Windows.MessageBox.Show("Total Pinjaman tidak boleh kosong", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
+                    total_pinjaman.Text = "0";
                 }
+
+               
 
                 if(!string.IsNullOrEmpty(Id.Text))
                     Dto.Id = Convert.ToInt32(Id.Text);

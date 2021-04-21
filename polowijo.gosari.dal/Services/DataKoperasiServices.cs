@@ -88,7 +88,7 @@ namespace polowijo.gosari.dal
                 {
                     _command.CommandType = CommandType.Text;
                     _command.Connection = conn;
-                    _command.CommandText = "Update BAGI_SHU " +
+                    _command.CommandText = "Update DATA_KOPERASI " +
                         "SET tahun =@Tahun, total_shu =@TotalShu, total_simpanan =@TotalSimpanan, total_penjualan=@TotalPenjualan, total_pinjaman=@TotalPinjaman, created_date=@created_date, created_by=@created_by, modified_date=@modified_date, modified_by=@modified_by WHERE id = @Id;";
                     
                     _command.Parameters.AddWithValue("@Tahun", Dto.Tahun);
