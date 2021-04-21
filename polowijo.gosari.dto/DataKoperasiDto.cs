@@ -10,10 +10,10 @@ namespace polowijo.gosari.dto
     {
         public long Id { set; get; }
         public int Tahun { set; get; }
-        public decimal TotalShu { set; get; }
-        public decimal TotalSimpanan { set; get; }
-        public decimal TotalPenjualan { set; get; }
-        public decimal TotalPinjaman { set; get; }
+        public double TotalShu { set; get; }
+        public double TotalSimpanan { set; get; }
+        public double TotalPenjualan { set; get; }
+        public double TotalPinjaman { set; get; }
         public DateTime CreatedDate { set; get; }
         public string CreatedBy { set; get; }
         public DateTime ModifiedDate { set; get; }

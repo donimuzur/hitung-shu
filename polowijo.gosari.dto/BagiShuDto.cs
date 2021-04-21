@@ -11,13 +11,13 @@ namespace polowijo.gosari.dto
         public long Id { set; get; }
         public string IdAnggota { set; get; }
         public string NamaAnggota { set; get; }
-        public decimal TotalSimpanan { set; get; }
-        public decimal TotalBungaPinjaman { set; get; }
-        public decimal TotalBelanja { set; get; }
-        public decimal Jma { set; get; }
-        public decimal Jua { set; get; }
-        public decimal Jpa { set; get; }
-        public decimal TotalShu { set; get; }
+        public double TotalSimpanan { set; get; }
+        public double TotalBungaPinjaman { set; get; }
+        public double TotalBelanja { set; get; }
+        public double Jma { set; get; }
+        public double Jua { set; get; }
+        public double Jpa { set; get; }
+        public double TotalShu { set; get; }
         public int Periode { set; get; }
         public bool Status { set; get; }
         public DateTime CreatedDate { set; get; }

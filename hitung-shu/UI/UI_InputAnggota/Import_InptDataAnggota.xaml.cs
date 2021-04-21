@@ -222,7 +222,7 @@ namespace hitung_shu.UI.UI_InputAnggota
                                     if (!NpoiExtensions.IsNullOrEmpty(curRow.GetCell(3)))
                                     {
                                         var cellValue = curRow.GetCell(3).NumericCellValue;
-                                        Data.Pokok = Convert.ToDecimal(cellValue);
+                                        Data.Pokok = Convert.ToDouble(cellValue);
                                     }
                                 }
                                 catch (Exception ex) { Data.Message = ex.Message; }
@@ -232,7 +232,7 @@ namespace hitung_shu.UI.UI_InputAnggota
                                     if (!NpoiExtensions.IsNullOrEmpty(curRow.GetCell(4)))
                                     {
                                         var cellValue = curRow.GetCell(4).NumericCellValue;
-                                        Data.Wajib = Convert.ToDecimal(cellValue);
+                                        Data.Wajib = Convert.ToDouble(cellValue);
                                     }
                                         
                                 }
@@ -243,7 +243,7 @@ namespace hitung_shu.UI.UI_InputAnggota
                                     if (!NpoiExtensions.IsNullOrEmpty(curRow.GetCell(5)))
                                     {
                                         var cellValue = curRow.GetCell(5).NumericCellValue;
-                                        Data.Sukarela = Convert.ToDecimal(cellValue);
+                                        Data.Sukarela = Convert.ToDouble(cellValue);
                                     }
                                 }
                                 catch (Exception ex) { Data.Message = ex.Message; }
@@ -253,7 +253,7 @@ namespace hitung_shu.UI.UI_InputAnggota
                                     if (!NpoiExtensions.IsNullOrEmpty(curRow.GetCell(6)))
                                     {
                                         var cellValue = curRow.GetCell(6).NumericCellValue;
-                                        Data.Belanja = Convert.ToDecimal(cellValue);
+                                        Data.Belanja = Convert.ToDouble(cellValue);
                                     }
                                 }
                                 catch (Exception ex) { Data.Message = ex.Message; }
@@ -264,7 +264,7 @@ namespace hitung_shu.UI.UI_InputAnggota
                                     if (!NpoiExtensions.IsNullOrEmpty(curRow.GetCell(7)))
                                     {
                                         var cellValue = curRow.GetCell(7).NumericCellValue;
-                                        Data.BungaPinjaman = Convert.ToDecimal(cellValue);
+                                        Data.BungaPinjaman = Convert.ToDouble(cellValue);
                                     }
                                 }
                                 catch (Exception ex) { Data.Message = ex.Message; }

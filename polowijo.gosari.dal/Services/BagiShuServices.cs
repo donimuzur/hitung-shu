@@ -86,9 +86,9 @@ namespace polowijo.gosari.dal
                         Dto.Id = Convert.ToInt64(row["id"]);
                         Dto.IdAnggota = Convert.ToString(row["id_anggota"]);
                         Dto.NamaAnggota = Convert.ToString(row["nama_anggota"]);
-                        Dto.Jma = Convert.ToDecimal(row["JMA"]);
-                        Dto.Jua = Convert.ToDecimal(row["JUA"]);
-                        Dto.Jpa = Convert.ToDecimal(row["JPA"]);
+                        Dto.Jma = Convert.ToDouble(row["JMA"]);
+                        Dto.Jua = Convert.ToDouble(row["JUA"]);
+                        Dto.Jpa = Convert.ToDouble(row["JPA"]);
                         Dto.ModifiedBy = Convert.ToString(row["modified_by"]);
                         Dto.ModifiedDate = Convert.ToDateTime(row["modified_date"]);
                         Dto.CreatedBy = Convert.ToString(row["created_by"]);
@@ -129,9 +129,9 @@ namespace polowijo.gosari.dal
                         Dto.Id = Convert.ToInt64(row["id"]);
                         Dto.IdAnggota = Convert.ToString(row["id_anggota"]);
                         Dto.NamaAnggota = Convert.ToString(row["nama_anggota"]);
-                        Dto.Jma = Convert.ToDecimal(row["JMA"]); 
-                        Dto.Jua = Convert.ToDecimal(row["JUA"]);
-                        Dto.Jpa = Convert.ToDecimal(row["JPA"]);
+                        Dto.Jma = Convert.ToDouble(row["JMA"]); 
+                        Dto.Jua = Convert.ToDouble(row["JUA"]);
+                        Dto.Jpa = Convert.ToDouble(row["JPA"]);
                         Dto.ModifiedBy = Convert.ToString(row["modified_by"]); 
                         Dto.ModifiedDate = Convert.ToDateTime(row["modified_date"] );
                         Dto.CreatedBy = Convert.ToString(row["created_by"]);  
@@ -170,7 +170,7 @@ namespace polowijo.gosari.dal
                         var Sukarela = GetAllIpt.Sum(x => x.Sukarela);
 
                         Dto.TotalSimpanan = Pokok + Wajib + Sukarela;
-                        Dto.Jma = (Dto.TotalSimpanan / GetDataShu.TotalSimpanan) * (decimal)0.2 * GetDataShu.TotalShu;
+                        Dto.Jma = (Dto.TotalSimpanan / GetDataShu.TotalSimpanan) * (double)0.2 * GetDataShu.TotalShu;
                     }
                     catch (Exception)
                     {
@@ -182,7 +182,7 @@ namespace polowijo.gosari.dal
                     try
                     {
                         Dto.TotalBelanja = GetAllIpt.Sum(x => x.Belanja);
-                        Dto.Jua = (Dto.TotalBelanja / GetDataShu.TotalPenjualan) * (decimal)0.1 * GetDataShu.TotalShu;
+                        Dto.Jua = (Dto.TotalBelanja / GetDataShu.TotalPenjualan) * (double)0.1 * GetDataShu.TotalShu;
                     }
                     catch (Exception)
                     {
@@ -194,7 +194,7 @@ namespace polowijo.gosari.dal
                     try
                     {
                         Dto.TotalBungaPinjaman = GetAllIpt.Sum(x => x.BungaPinjaman);
-                        Dto.Jpa = (Dto.TotalBungaPinjaman / GetDataShu.TotalPinjaman) * (decimal)0.1 * GetDataShu.TotalShu;
+                        Dto.Jpa = (Dto.TotalBungaPinjaman / GetDataShu.TotalPinjaman) * (double)0.1 * GetDataShu.TotalShu;
                     }
                     catch (Exception)
                     {
@@ -237,7 +237,7 @@ namespace polowijo.gosari.dal
                             var Sukarela = GetAllIpt.Sum(x => x.Sukarela);
 
                             Dto.TotalSimpanan = Pokok + Wajib + Sukarela;
-                            Dto.Jma = (Dto.TotalSimpanan / GetDataShu.TotalSimpanan) * (decimal)0.2 * GetDataShu.TotalShu;
+                            Dto.Jma = (Dto.TotalSimpanan / GetDataShu.TotalSimpanan) * (double)0.2 * GetDataShu.TotalShu;
                         }
                         catch (Exception)
                         {
@@ -249,7 +249,7 @@ namespace polowijo.gosari.dal
                         try
                         {
                             Dto.TotalBelanja = GetAllIpt.Sum(x => x.Belanja);
-                            Dto.Jua = (Dto.TotalBelanja / GetDataShu.TotalPenjualan) * (decimal)0.1 * GetDataShu.TotalShu;
+                            Dto.Jua = (Dto.TotalBelanja / GetDataShu.TotalPenjualan) * (double)0.1 * GetDataShu.TotalShu;
                         }
                         catch (Exception)
                         {
@@ -261,7 +261,7 @@ namespace polowijo.gosari.dal
                         try
                         {
                             Dto.TotalBungaPinjaman = GetAllIpt.Sum(x => x.BungaPinjaman);
-                            Dto.Jpa = (Dto.TotalBungaPinjaman / GetDataShu.TotalPinjaman) * (decimal)0.1 * GetDataShu.TotalShu;
+                            Dto.Jpa = (Dto.TotalBungaPinjaman / GetDataShu.TotalPinjaman) * (double)0.1 * GetDataShu.TotalShu;
                         }
                         catch (Exception)
                         {

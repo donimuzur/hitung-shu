@@ -167,10 +167,10 @@ namespace hitung_shu.UI.UI_DataShu
                     Dto.Id = Convert.ToInt32(Id.Text);
 
                 Dto.Tahun = Convert.ToInt32(Tahun.Text);
-                Dto.TotalShu = Convert.ToDecimal(total_shu.Text);
-                Dto.TotalPenjualan = Convert.ToDecimal(total_belanja.Text);
-                Dto.TotalPinjaman = Convert.ToDecimal(total_pinjaman.Text);
-                Dto.TotalSimpanan = Convert.ToDecimal(total_simpanan.Text);
+                Dto.TotalShu = Convert.ToDouble(total_shu.Text);
+                Dto.TotalPenjualan = Convert.ToDouble(total_belanja.Text);
+                Dto.TotalPinjaman = Convert.ToDouble(total_pinjaman.Text);
+                Dto.TotalSimpanan = Convert.ToDouble(total_simpanan.Text);
 
                 _dataKoperasiServices.InserOrUpdate(Dto);
                 PopulateData(Dto);

@@ -101,11 +101,11 @@ namespace hitung_shu.UI.UI_InputAnggota
                 }
                 Dto.NamaAnggota = CheckAnggota.NamaAnggota;
                 Dto.Tanggal = Convert.ToDateTime(Tanggal.Text);
-                Dto.Pokok = Convert.ToDecimal(Pokok.Text);
-                Dto.Wajib = Convert.ToDecimal(Wajib.Text);
-                Dto.Sukarela = Convert.ToDecimal(Sukarela.Text);
-                Dto.Belanja = Convert.ToDecimal(Belanja.Text);
-                Dto.BungaPinjaman = Convert.ToDecimal(BungaPinjaman.Text);
+                Dto.Pokok = Convert.ToDouble(Pokok.Text);
+                Dto.Wajib = Convert.ToDouble(Wajib.Text);
+                Dto.Sukarela = Convert.ToDouble(Sukarela.Text);
+                Dto.Belanja = Convert.ToDouble(Belanja.Text);
+                Dto.BungaPinjaman = Convert.ToDouble(BungaPinjaman.Text);
                 Dto = _iptAnggotaServices.InserOrUpdate(Dto);
                 System.Windows.MessageBox.Show("Data sudah tersimpan", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                 CloseWin();

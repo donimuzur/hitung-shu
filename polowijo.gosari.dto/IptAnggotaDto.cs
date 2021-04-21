@@ -12,11 +12,11 @@ namespace polowijo.gosari.dto
         public string IdAnggota { set; get; }
         public string NamaAnggota { set; get; }
         public DateTime Tanggal { set; get; }
-        public decimal Pokok { set; get; }
-        public decimal Wajib { set; get; }
-        public decimal Sukarela { set; get; }
-        public decimal Belanja { set; get; }
-        public decimal BungaPinjaman { set; get; }
+        public double Pokok { set; get; }
+        public double Wajib { set; get; }
+        public double Sukarela { set; get; }
+        public double Belanja { set; get; }
+        public double BungaPinjaman { set; get; }
         public DateTime CreatedDate { set; get; }
         public string CreatedBy { set; get; }
         public DateTime ModifiedDate { set; get; }
