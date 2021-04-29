@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hitung_shu.UI.UI_BagiSHU"
         mc:Ignorable="d"
-        Title="Hasil Perhitungan SHU" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Hasil Perhitungan SHU" d:DesignHeight="450" d:DesignWidth="800" Loaded="Window_Loaded">
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">

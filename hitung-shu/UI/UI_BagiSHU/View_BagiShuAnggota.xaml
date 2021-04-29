@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:hitung_shu.UI.UI_BagiSHU"
              xmlns:wpftoolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-             mc:Ignorable="d" d:DesignWidth="780" Height="500">
+             mc:Ignorable="d"  d:DesignHeight="500" d:DesignWidth="780">
     <Grid Background="White">
         <ScrollViewer>
             <StackPanel Orientation="Vertical" >

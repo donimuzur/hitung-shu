@@ -7,7 +7,7 @@
   <?define helpers_TargetDir=$(var.polowijo.gosari.helpers.TargetDir)?>
   <?define Dal_TargetDir=$(var.polowijo.gosari.dal.TargetDir)?>
 
-  <Product Id="*" Name="Hitung SHU" Language="1033" Version="1.0.0.0" Manufacturer="IT Polowijo Gosari Group" UpgradeCode="879ab3d6-95d7-4e6f-b664-d0f00ea57f34">
+  <Product Id="*" Name="Hitung SHU" Language="1033" Version="1.0.0.1" Manufacturer="IT Polowijo Gosari Group" UpgradeCode="879ab3d6-95d7-4e6f-b664-d0f00ea57f34">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\Other\license.rtf" />

@@ -103,13 +103,17 @@ namespace hitung_shu.UI.UI_DaftarAnggota
         {
             try
             {
-                var idx = (DataAnggotaDto)Dgv_Home.SelectedItem;
-                if (idx != null)
+                var count = Dgv_Home.SelectedItems.Count;
+                if (count > 0)
                 {
                     var Result = MessageBox.Show("Apakah and ingin menghapus data ini ?", "Info!", MessageBoxButton.YesNo, MessageBoxImage.Information);
                     if (Result == MessageBoxResult.Yes)
                     {
-                        _dataAnggotaServices.Delete(idx.Id);
+                        for (int i = 0; i < Dgv_Home.SelectedItems.Count; i++)
+                        {
+                            var idx = (DataAnggotaDto)Dgv_Home.SelectedItems[i];
+                            _dataAnggotaServices.Delete(idx.Id);
+                        }
 
                         System.Windows.MessageBox.Show("Data berhasil dihapus", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                         PopulateData();

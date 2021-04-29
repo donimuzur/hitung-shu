@@ -5,8 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:hitung_shu.UI.UI_BagiSHU"
              xmlns:wpftoolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-             mc:Ignorable="d" d:DesignWidth="780" Height="500">
+             mc:Ignorable="d"  d:DesignHeight="500" d:DesignWidth="780">
     <Grid Background="White">
+        <StackPanel>
+            
+        </StackPanel>
         <ScrollViewer>
             <StackPanel Orientation="Vertical" >
                 <GroupBox Header="Bagi SHU" Foreground="Black" Style="{x:Null}" FontSize="16" FontWeight="Bold" Background="{x:Null}">
@@ -67,7 +70,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="30,30,30,30">
                     <Button Content="Export To Excel" Height="50" Width="100"  x:Name="Export" Click="Export_Click" IsEnabled="False"></Button>
                     <Button Margin="30,0,0,0" Content="Simpan" Height="50" Width="100" x:Name="BtnSimpan" Click="BtnSimpan_Click" IsEnabled="False"></Button>
-                    <Button Margin="30,0,0,0" Content="Tutup" Height="50" Width="100"></Button>
+                    <Button Margin="30,0,0,0" Name="btnTutup" Content="Tutup" Height="50" Width="100" Click="btnTutup_Click"></Button>
                     <TextBlock Visibility="Hidden" x:Name="Id"></TextBlock>
                     <TextBlock Visibility="Hidden" x:Name="CreatedDate"></TextBlock>
                     <TextBlock Visibility="Hidden" x:Name="CreatedBy"></TextBlock>

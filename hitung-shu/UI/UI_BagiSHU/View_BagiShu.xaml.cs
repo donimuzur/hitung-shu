@@ -193,6 +193,20 @@ namespace hitung_shu.UI.UI_BagiSHU
                     
                     if(GetDataShu == null)
                     {
+                        System.Windows.MessageBox.Show("Informasi!! \n tidak ada data SHU di tahun "+ intTahun, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                        total_shu.Text = "0";
+                        total_simpanan.Text = "0";
+                        total_pinjaman.Text = "0";
+                        total_belanja.Text = "0";
+
+                        DanaCadangan.Text = "0";
+                        JasaModal.Text = "0";
+                        JasaAnggota.Text = "0";
+                        PengurusPengawas.Text = "0";
+                        KesejahteraanPegawai.Text = "0";
+                        Pendidikan.Text = "0";
+                        DanaSosial.Text = "0";
+
                         return;
                     }
                     total_shu.Text = String.Format("{0:N}", GetDataShu.TotalShu);
@@ -292,7 +306,7 @@ namespace hitung_shu.UI.UI_BagiSHU
                 //title
                 slDocument.SetCellValue(1, 1, "Detail SHU Koperasi Polowijo Karya Abadi");
                 slDocument.MergeWorksheetCells(1, 1, 1, 9);
-                slDocument.SetCellValue(2, 1, "Periode 2020");
+                slDocument.SetCellValue(2, 1, "Periode "+_intTahun);
                 slDocument.MergeWorksheetCells(2, 1, 2, 9);
 
                 total_shu.Dispatcher.BeginInvoke(new Action(() => { slDocument.SetCellValue(3, 1, "Total SHU = Rp. " + total_shu.Text); }));
@@ -435,5 +449,19 @@ namespace hitung_shu.UI.UI_BagiSHU
             return slDocument;
         }
         #endregion
+
+        private void btnTutup_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var _mainView = (DockPanel) this.Parent;
+                _mainView.Children.Clear();                
+            }
+            catch (Exception ex)
+            {
+                LogError.WriteError(ex);
+                System.Windows.MessageBox.Show("Error!! \n telah terjadi kesalahan, Hubungi administrator", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }    
 }
