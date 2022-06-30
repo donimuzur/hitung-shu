@@ -5,7 +5,7 @@
 
 ## About
 
-Aplikasi Hitung SHU ini dibangun untuk membantu perhitungan Sisa hasil usaha kegiatan koperasi di lingkungan koperasi karya polowijo
+Aplikasi Hitung SHU ini dibuat untuk membantu perhitungan Sisa hasil usaha kegiatan koperasi di lingkungan koperasi karya polowijo
 
 ## License
 
